@@ -1,52 +1,45 @@
-let count = 0;
-const MIN = 0;
-const MAX = 10;
+ let count = 0;
 
-const display = document.getElementById('counter-value');
-const message = document.getElementById('status-message');
-const incBtn = document.getElementById('btn-increment');
-const decBtn = document.getElementById('btn-decrement');
-const resetBtn = document.getElementById('btn-reset');
+const display = document.getElementById('number');
+const alertMsg = document.getElementById('alert');
+const btnPlus = document.getElementById('plus');
+const btnMinus = document.getElementById('minus');
+const btnReset = document.getElementById('reset');
 
-function updateUI() {
+function updateApp() {
     display.innerText = count;
 
-    // Handle Maximum Limit (10)
-    if (count >= MAX) {
-        message.innerText = "Maximum limit (10) reached!";
-        incBtn.disabled = true;
+    // Limit at 10
+    if (count >= 10) {
+        alertMsg.innerText = "Max 10 reached!";
+        btnPlus.disabled = true;
     } else {
-        incBtn.disabled = false;
+        btnPlus.disabled = false;
+        alertMsg.innerText = "";
     }
 
-    // Handle Minimum Limit (0)
-    if (count <= MIN) {
-        decBtn.disabled = true;
-    } else {
-        decBtn.disabled = false;
-        if (count < MAX) message.innerText = ""; // Clear message if back in range
-    }
+    // Limit at 0
+    btnMinus.disabled = (count <= 0);
 }
 
-incBtn.addEventListener('click', () => {
-    if (count < MAX) {
+btnPlus.onclick = () => {
+    if (count < 10) {
         count++;
-        updateUI();
+        updateApp();
     }
-});
+};
 
-decBtn.addEventListener('click', () => {
-    if (count > MIN) {
+btnMinus.onclick = () => {
+    if (count > 0) {
         count--;
-        updateUI();
+        updateApp();
     }
-});
+};
 
-resetBtn.addEventListener('click', () => {
+btnReset.onclick = () => {
     count = 0;
-    message.innerText = "";
-    updateUI();
-});
+    updateApp();
+};
 
-// Initialize UI state on page load
-updateUI();
+// Start the app state
+updateApp();
