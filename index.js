@@ -1,4 +1,4 @@
-let count = 0;
+ let count = 0;
 const MAX_LIMIT = 10;
 
 // Selecting elements
