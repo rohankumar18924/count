@@ -1,16 +1,20 @@
-let count = 0;
-const counterDisplay = document.getElementById("counter");
-const startBtn = document.getElementById("startBtn");
+ let count = 0;
 
-startBtn.addEventListener("click", function() {
-
-    let interval = setInterval(function() {
+function increase() {
+    if (count < 10) {
         count++;
-        counterDisplay.textContent = count;
+        document.getElementById("count").innerText = count;
+    }
+}
 
-        if (count === 10) {
-            clearInterval(interval); // Stop at 10
-        }
+function decrease() {
+    if (count > 0) {
+        count--;
+        document.getElementById("count").innerText = count;
+    }
+}
 
-    }, 1000); // 1 second delay
-});
+function reset() {
+    count = 0;
+    document.getElementById("count").innerText = count;
+}
