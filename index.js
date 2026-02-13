@@ -1,20 +1,45 @@
- let count = 0;
+let count = 0;
+const MAX_LIMIT = 10;
 
-function increase() {
-    if (count < 10) {
-        count++;
-        document.getElementById("count").innerText = count;
+// Selecting elements
+const display = document.getElementById('counter-value');
+const message = document.getElementById('limit-msg');
+const incBtn = document.getElementById('increment');
+const decBtn = document.getElementById('decrement');
+const resetBtn = document.getElementById('reset');
+
+// Function to update the screen
+function updateDisplay() {
+    display.innerText = count;
+
+    // Check if we hit the limit of 10
+    if (count >= MAX_LIMIT) {
+        message.innerText = "Limit Reached (10)";
+        incBtn.disabled = true;
+    } else {
+        message.innerText = "";
+        incBtn.disabled = false;
     }
+
+    // Optional: disable decrement if at 0
+    decBtn.disabled = (count <= 0);
 }
 
-function decrease() {
-    if (count > 0) {
-        count--;
-        document.getElementById("count").innerText = count;
-    }
-}
+// Event Listeners
+incBtn.addEventListener('click', () => {
+    if (count < MAX_LIMIT) count++;
+    updateDisplay();
+});
 
-function reset() {
+decBtn.addEventListener('click', () => {
+    if (count > 0) count--;
+    updateDisplay();
+});
+
+resetBtn.addEventListener('click', () => {
     count = 0;
-    document.getElementById("count").innerText = count;
-}
+    updateDisplay();
+});
+
+// Initialize the UI on load
+updateDisplay();
