@@ -3,22 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter App</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Simple Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 { font-size: 3rem; margin: 10px 0; color: #333; }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        .limit-msg { color: #d9534f; font-weight: bold; height: 20px; }
+    </style>
 </head>
 <body>
 
-    <div class="counter-card">
-        <h2 id="counter-value">0</h2>
-        <p id="limit-msg"></p>
-        
-        <div class="controls">
-            <button id="decrement">-</button>
-            <button id="reset">Reset</button>
-            <button id="increment">+</button>
-        </div>
-    </div>
+<div class="container">
+    <div id="display">0</div>
+    <div class="limit-msg" id="message"></div>
+    <br>
+    <button onclick="changeCount(-1)">-</button>
+    <button onclick="resetCount()">Reset</button>
+    <button onclick="changeCount(1)" id="incBtn">+</button>
+</div>
 
-    <script src="script.js"></script>
+<script>
+    let count = 0;
+    const maxLimit = 10;
+    const display = document.getElementById('display');
+    const message = document.getElementById('message');
+    const incBtn = document.getElementById('incBtn');
+
+    function changeCount(value) {
+        // Only increase if below 10, or decrease if above 0
+        if (value > 0 && count < maxLimit) {
+            count++;
+        } else if (value < 0 && count > 0) {
+            count--;
+        }
+        updateUI();
+    }
+
+    function resetCount() {
+        count = 0;
+        updateUI();
+    }
+
+    function updateUI() {
+        display.innerText = count;
+        
+        // Show message if limit reached
+        if (count === maxLimit) {
+            message.innerText = "Maximum limit reached!";
+            incBtn.disabled = true;
+        } else {
+            message.innerText = "";
+            incBtn.disabled = false;
+        }
+    }
+</script>
+
 </body>
 </html>
