@@ -1,17 +1,17 @@
- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Counter Until 10</title>
+    <title>Counter App (Limit 10)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Counter (Stops at 10)</h1>
-        <h2 id="counter">0</h2>
-        <button id="startBtn">Start</button>
-    </div>
+    <h1>Counter App (Max 10)</h1>
+    <h2 id="count">0</h2>
+
+    <button onclick="increase()">+</button>
+    <button onclick="decrease()">-</button>
+    <button onclick="reset()">Reset</button>
 
     <script src="script.js"></script>
 </body>
